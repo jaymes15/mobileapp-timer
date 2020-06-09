@@ -257,7 +257,124 @@ void stop(){
        ],
      ),
    );
+
   }
+
+//  //////////////
+  /////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////
+  ////STOP WATCH CODE/////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
+  bool startispressed = true;
+ bool stopispressed = true;
+ bool resetispressed = true;
+ String stoptimetodisplay = "00:00:00";
+var swatch = Stopwatch();
+ void startstopwatch(){
+
+ }
+
+ void stopstopwatch(){}
+
+ void resetstopwatch(){}
+
+  Widget stopwatch(){
+   return Container(
+     alignment: Alignment.center,
+     child: Column(
+       children: <Widget>[
+         Padding(
+           padding: EdgeInsets.only(top:30.0),
+         ),
+         Expanded(
+           flex: 6,
+           child: Text(
+             stoptimetodisplay,
+             style: TextStyle(
+               fontSize: 50.0,
+               fontWeight: FontWeight.w700,
+             ),
+           ),
+         ),
+         Expanded(
+           flex: 4,
+           child: Container(
+             child: Column(
+               mainAxisAlignment: MainAxisAlignment.spaceAround,
+               children: <Widget>[
+                 Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                   children: <Widget>[
+                     RaisedButton(
+                       onPressed: stopispressed ? null : stopstopwatch,
+                       color: Colors.red,
+                       padding: EdgeInsets.symmetric(
+                         horizontal: 35.0,
+                         vertical:15.0,
+                       ),
+                       child: Text(
+                         "Stop",
+                         style: TextStyle(
+                           fontSize: 20.0,
+                           color: Colors.white,
+                         ),
+                       ),
+                     ),
+                     RaisedButton(
+                       onPressed: resetispressed ? null : resetstopwatch,
+
+                       color: Colors.teal,
+                       padding: EdgeInsets.symmetric(
+                         horizontal: 35.0,
+                         vertical:15.0,
+                       ),
+                       child: Text(
+                         "Reset",
+                         style: TextStyle(
+                           fontSize: 20.0,
+                           color: Colors.white,
+                         ),
+                       ),
+                     ),
+                   ],
+                 ),
+                 RaisedButton(
+                   onPressed: startispressed ? startstopwatch : null,
+
+                   color: Colors.green,
+                   padding: EdgeInsets.symmetric(
+                     horizontal: 80.0,
+                     vertical:20.0,
+                   ),
+                   child: Text(
+                     "Start",
+                     style: TextStyle(
+                       fontSize: 20.0,
+                       color: Colors.white,
+                     ),
+                   ),
+                 ),
+               ],
+             ),
+           ),
+         ),
+       ],
+     ),
+
+   );
+  }
+
+
+
+
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -292,7 +409,7 @@ void stop(){
       body: TabBarView(
         children: <Widget>[
           timer(),
-          Text("StopWatch"),
+          stopwatch(),
         ],
         controller: tb,
       ),
