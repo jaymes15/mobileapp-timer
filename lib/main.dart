@@ -271,13 +271,51 @@ void stop(){
  bool resetispressed = true;
  String stoptimetodisplay = "00:00:00";
 var swatch = Stopwatch();
+final dur = const Duration(seconds: 1);
+
+void starttimer(){
+  Timer(dur, keeprunning);
+}
+
+void keeprunning(){
+  if(swatch.isRunning){
+    starttimer();
+  }
+  setState(() {
+    stoptimetodisplay =swatch.elapsed.inHours.toString().padLeft(2,"0") + ":"
+                          + (swatch.elapsed.inMinutes%60).toString().padLeft(2,"0") + ":"
+                          + (swatch.elapsed.inSeconds%60).toString().padLeft(2,"0");
+  });
+}
+
  void startstopwatch(){
+  setState(() {
+    stopispressed =false;
+    startispressed = false;
+  });
+  swatch.start();
+  starttimer();
 
  }
 
- void stopstopwatch(){}
+ void stopstopwatch(){
+  setState(() {
+    stopispressed = true;
+    resetispressed = false;
+    startispressed=true;
 
- void resetstopwatch(){}
+  });
+  swatch.stop();
+ }
+
+ void resetstopwatch(){
+   setState(() {
+     startispressed = true;
+     resetispressed = true;
+   });
+   swatch.reset();
+   stoptimetodisplay = "00:00:00";
+ }
 
   Widget stopwatch(){
    return Container(
